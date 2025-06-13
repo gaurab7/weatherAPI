@@ -1,14 +1,15 @@
-import express from 'express'
 import axios from 'axios'
 
-const city = 'Bhaktapur'//placeholder for now
-const apiKey = 'fc8f372e9aa6427fb5a92510251306'
+
 
 //using async function as fe
-export async function fetchWeather() {
+export async function fetchWeather(city, apiKey) {
     try {
-    const weather = await axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
-    console.log(weather)
+        const weather = await axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}`)
+        console.log(weather)
+        const current_temp = weather
+        return current_temp
+        
   }
    catch (err) {
     console.log("error getting data:",err)
