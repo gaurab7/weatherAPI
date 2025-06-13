@@ -1,0 +1,18 @@
+import express from 'express'
+import weatherRoutes from './routes/weatherRoute.js'
+
+const app = express()
+
+//enables app to accept and send json data
+app.use(express.json())
+
+const PORT = process.env.PORT || 8848
+
+//ROUTES
+app.use('/weather', weatherRoutes)
+
+
+//Start the server
+app.listen(PORT, ()=>{
+    console.log(`server started on PORT: ${PORT}`)
+})
