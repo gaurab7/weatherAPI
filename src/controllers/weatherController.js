@@ -2,8 +2,9 @@ import { fetchWeather } from '../services/weatherServices.js'
 
 
 //need to format this
-export async function weatherData(city, apiKey) {
+export async function weatherData(city) {
        
+    const apiKey = process.env.apiKey
     const result = await fetchWeather(city, apiKey)
     //formating the fetched weather data
     //const { parent: { child } } = object;--->Extracts object.parent.child into a variable named child.
