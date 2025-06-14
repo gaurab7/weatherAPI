@@ -14,7 +14,7 @@ export async function verifyCity(city) {
          //as maxRows=1 it will only provide the top result, we just need to make sure there is at least one result
          if(result.data.totalResultsCount > 0)
          {
-            console.log(result.data.geonames[0])
+            //console.log(result.data.geonames[0])
             return true
          }
          else{
