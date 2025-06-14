@@ -1,12 +1,16 @@
-import express from 'express'
+import express, { application } from 'express'
 import { weatherData } from '../controllers/weatherController.js'
 import dotenv from 'dotenv'
+import { limiter  } from '../middleware/rate_limiter.js'
+
+
 
 dotenv.config()
 
 const router = express.Router()
 
-router.get('/', async (req, res)=>{
+//best practice to have limiters on routes rather than on server
+router.get('/', limiter,  async (req, res)=>{
        const city  = req.query.q
        const apiKey = process.env.apiKey
        const formatted_data = await weatherData(city, apiKey)
