@@ -1,2 +1,2 @@
 ###
-GET  http://localhost:8848/weather?q=Bhaktapur
+GET  http://localhost:8848/weather?q=kathmandu
