@@ -7,7 +7,7 @@ Built with testing in mind (Jest + Supertest).
 ## 🛠 Tech Stack
 - **Backend**: Node.js, Express
 - **APIs**: WeatherAPI (Weather), GeoNames (City Validation)
-- **Testing**: Jest, Supertest
+- **Testing**: Jest, Supertest, REST Client
 - **Rate Limiting**: express-rate-limit
 
 ## 🚀 Features
@@ -21,3 +21,4 @@ Built with testing in mind (Jest + Supertest).
   - Integrates with WeatherAPI.com.
 - **Comprehensive Testing**  
   - Rate limiting & verification middleware tests (Jest + Supertest).
+  - Weather API calls tests (REST Client)
