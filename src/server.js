@@ -2,6 +2,7 @@ import express from 'express'
 import weatherRoutes from './routes/weatherRoute.js'
 import cityVerify from './middleware/cityVerify.js'
 
+
 const app = express()
 
 //enables app to accept and send json data
@@ -17,3 +18,5 @@ app.use('/weather',cityVerify, weatherRoutes)
 app.listen(PORT, ()=>{
     console.log(`server started on PORT: ${PORT}`)
 })
+
+export default app
