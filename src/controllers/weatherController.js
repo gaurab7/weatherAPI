@@ -47,9 +47,5 @@ export async function weatherData(city, apiKey) {
     const hum = result.data.current.humidity
     const cld = result.data.current.cloud
     const flike = result.data.current.feelslike*/
-     
-
-   
-   
 }
 
