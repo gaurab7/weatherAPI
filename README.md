@@ -1,7 +1,7 @@
 
 # 🌦️ Weather API (Backend)
 
-A backend API for fetchingr eal-timew eather data fot any city using WeatherAPI, featuring rate limiting, city input validation, and integration with third-party weather services.
+A backend API for fetching real-timew eather data fot any city using WeatherAPI, featuring rate limiting, city input validation, and integration with third-party weather services.
 Built with testing in mind (Jest + Supertest).
 
 ## 🛠 Tech Stack
