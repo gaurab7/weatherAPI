@@ -2,11 +2,9 @@ import express from 'express'
 import { verifyCity } from '../services/cityServices.js'
 
 
-const router = express.Router()
-
 
 //need to format this
-router.get('/', async (req, res, next)=>{
+export async function verificationMiddleware(req, res, next){
     const city  = req.query.q
     const verification = await verifyCity(city)
     if(!verification) {
@@ -17,6 +15,4 @@ router.get('/', async (req, res, next)=>{
     {
         next()
     }
-})
-
-export default router
+}
