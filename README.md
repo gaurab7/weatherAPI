@@ -1,16 +1,16 @@
 
-# 🌦️ Weather API (Backend)
+#  Weather API (Backend)
 
 A backend API for fetching real-timew eather data fot any city using WeatherAPI, featuring rate limiting, city input validation, and integration with third-party weather services.
 Built with testing in mind (Jest + Supertest).
 
-## 🛠 Tech Stack
+##  Tech Stack
 - **Backend**: Node.js, Express
 - **APIs**: WeatherAPI (Weather), GeoNames (City Validation)
 - **Testing**: Jest, Supertest, REST Client
 - **Rate Limiting**: express-rate-limit
 
-## 🚀 Features
+##  Features
 
 - **City Validation Middleware**  
   - Validates cities via GeoNames API
