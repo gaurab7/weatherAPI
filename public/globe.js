@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', ()=>{
         //basic scene setup--THREE.js documentation
     const scene = new THREE.Scene()//where we place the objects
@@ -44,16 +42,49 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
     // rotation animation
+    let isRotating = true
     function rotation() {
         requestAnimationFrame(rotation)//calls the function again and again--creates a loop
-        earth.rotation.y += 0.001//rotate earth on the y-axis like a real earth
+        if(isRotating){
+            //only keep rotating if isRotating is true-- toggleRotation will change this value
+             earth.rotation.y += 0.005//rotate earth on the y-axis like a real earth
+        }
         renderer.render(scene, camera)//renders the scene from the perspective of the camera
     }
 
     rotation()
-
 })
 
+//convert the longitude and latitude from the data to coordinates on the globe
+export function degtoRad(deg) {
+    return deg * (Math.PI / 180)
+}
 
+export function latLongTo3D(lat, lon, radius, height) {
+    const Lat = degtoRad(lat)
+    const Lon = degtoRad(lon)
+    //formula i got from the internet
+    //converts lat,long to x,y,z coordinates on the sphere
+    const x = radius * Math.cos(Lat) * Math.cos(Lon)
+    const y = radius * Math.sin(Lat)
+    const z = radius * Math.cos(Lat) * Math.sin(Lon)
+    //returing the coordinates in JSON format
+    return { x: x, y: y, z: z }
+}
+
+//everyting after getting the coordinates is done in client.js 
+export function toggleRotation(state){
+    isRotating = state
+}
+
+export function changeViewToCoords(lon, lat){
+    //to just rotate the globe to the coords we dont need precise coords
+    //lon and lat are angles and angels stay the same no matter the radius of the sphere
+    //so we can use the lon and lat of earth for our puny globe as well as they are angles
+    const Lon = degtoRad(lon)
+    const Lat = degtoRad(lat)
+    earth.rotation.y = -Lon 
+    earth.rotation.x = Lat//-ve to adjust the view 
+}
 
 
