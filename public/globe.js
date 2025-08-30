@@ -1,10 +1,14 @@
+
 let isRotating = true
 let earth
+let camera
+let scene
+let renderer
 document.addEventListener('DOMContentLoaded', ()=>{
         //basic scene setup--THREE.js documentation
-    const scene = new THREE.Scene()//where we place the objects
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000)//how we view the scene
-    const renderer = new THREE.WebGLRenderer({alpha: true})//renders the scene for us
+     scene = new THREE.Scene()//where we place the objects
+ camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000)//how we view the scene
+     renderer = new THREE.WebGLRenderer({alpha: true})//renders the scene for us
 
     scene.background = null//makes background transparent   
 
@@ -62,7 +66,7 @@ export function degtoRad(deg) {
     return deg * (Math.PI / 180)
 }
 
-export function latLongTo3D(lat, lon, radius, height) {
+export function latLongTo3D(lat, lon, radius) {
     const Lat = degtoRad(lat)
     const Lon = degtoRad(lon)
     //formula i got from the internet
@@ -71,7 +75,7 @@ export function latLongTo3D(lat, lon, radius, height) {
     const y = radius * Math.sin(Lat)
     const z = radius * Math.cos(Lat) * Math.sin(Lon)
     //returing the coordinates in JSON format
-    return { x: x, y: y, z: z }
+    return {x,y,z}
 }
 
 //everyting after getting the coordinates is done in client.js 
@@ -87,12 +91,32 @@ export function changeViewToCoords(lon, lat){
     const Lat = degtoRad(lat)
     /* to make the location on globe face the user/camera,
     we need to change its rotation(x,y,z) */
-    earth.rotation.set(0,0,0)//eset
-    earth.rotation.set(
-        Lat,
-        -Lon+80,
-        0
-    )
+
+    earth.rotation.y = -Lon + (-Math.PI / 2)
+    earth.rotation.x = Lat
 }
 
+
+export function zoomToCity(position) {
+    // Make sure position is a THREE.Vector3
+    const dir = new THREE.Vector3(position.x, position.y, position.z).normalize()
+    // Distance from globe center (adjust >1 to stay outside the globe)
+    const targetPos = dir.multiplyScalar(1.6);
+    function zoom() {
+        // Move camera toward target
+        camera.position.lerp(targetPos, 0.05);
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+
+        // Continue zooming until close enough
+        if (camera.position.distanceTo(targetPos) > 0.5){
+            requestAnimationFrame(zoom);
+        } else {
+            camera.position.copy(targetPos); // snap to final position
+            camera.lookAt(0, 0, 0);
+        }
+    }
+
+    zoom();
+}
 

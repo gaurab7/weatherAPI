@@ -75,6 +75,7 @@ body{
 }
 
 .container{
+    position: relative;/*weather res and globe are relative to this*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +88,8 @@ body{
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 500px;
+    height: 100%;
+    z-index: 1; /*globe in the back so card can overlap*/
 }
 
 #error-message {
@@ -96,8 +98,15 @@ body{
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    display: none; /* Hide it by default */
+    display: none; /* hidden by default, shown if invalid input*/
     text-align: center;
+}
+
+#weather-result {
+    background-color: #f0f4f8;
+    position: absolute;
+    display: none;/*hidden by default, shown when weather result recieved*/
+
 }
 
 @media (max-width: 768px) {
