@@ -90,7 +90,15 @@ body{
     height: 500px;
 }
 
-
+#error-message {
+    color: #fff;
+    background-color: #e74c3c; /* Red background for errors */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none; /* Hide it by default */
+    text-align: center;
+}
 
 @media (max-width: 768px) {
     
