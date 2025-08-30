@@ -10,7 +10,8 @@ export async function fetchWeather(city, apiKey) {
         
   }
    catch (err) {
-    console.log("error getting data:",err)
+    //do not print the actual error as it may contain sensitive information(api key in this case)
+    console.log("error getting data")
    }
 }
 
