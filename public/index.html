@@ -17,16 +17,22 @@
             <li><a href=""><i class="bi bi-share"></i></a></li>
         </ul>
     </nav>
-    <section class="search-section">
-        <form id="weather-form">
+    <section class="search-container">
+        <form id="city">
             <input type="text" id="city-input" placeholder="Enter the city name here..." required>
-            <button type="submit">
+            <button type="submit" id="search-button">
                 <i class="bi bi-search"></i>
             </button>
-        </form>
-        <div id="weather-result"></div>
+        </form><br>
+    </section>
     <div class="container">
-
+        <div id="weather-result"></div>
+        <div id="globe-container">  
+            <!--The globe will be rendered here using JS-->
+        </div>
     </div>
+    <!--Three.js is a js library to render the globe-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script type="module" src="globe.js"></script><!--using ES module not classic JS-->
 </body>
 </html>
