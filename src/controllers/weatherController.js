@@ -10,7 +10,10 @@ export async function weatherData(city) {
     //const { parent: { child } } = object;--->Extracts object.parent.child into a variable named child.
     //const { originalName: newName } = object;--->Extracts object.originalName into a variable named newName.
     const { 
-        location: { localtime: lclTme },//result.data.location.localtime --> lclTme
+        location: { localtime: lclTme,
+            lat: lat,
+            lon: lon
+         },//result.data.location.localtime --> lclTme
         current : {
             last_updated :  lstUpd ,
             temp_c :  temp ,//result.data.current.temp_c---> temp
@@ -34,7 +37,9 @@ export async function weatherData(city) {
         wind_dir :  winddir ,
         humidity :  hum ,
         cloud :   cld ,
-        feelslike :  flike 
+        feelslike :  flike,
+        latitude: lat,
+        longitude: lon
     }
     //better than:
     /* 

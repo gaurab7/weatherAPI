@@ -1,3 +1,5 @@
+let isRotating = true
+let earth
 document.addEventListener('DOMContentLoaded', ()=>{
         //basic scene setup--THREE.js documentation
     const scene = new THREE.Scene()//where we place the objects
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         globeContainer.style.background = 'linear-gradient(to bottom, #0f2027, #203a43, #2c5364)'//night gradient background
     }
     const material = new THREE.MeshStandardMaterial({ map: texture })//material with texture--reflects light
-    const earth = new THREE.Mesh(geometry, material)//actual object combining geometry and material
+    earth = new THREE.Mesh(geometry, material)//actual object combining geometry and material
     scene.add(earth)//add earth to the scene
 
     // Lighting from a single direction
@@ -42,7 +44,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
     // rotation animation
-    let isRotating = true
     function rotation() {
         requestAnimationFrame(rotation)//calls the function again and again--creates a loop
         if(isRotating){
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     rotation()
+
 })
 
 //convert the longitude and latitude from the data to coordinates on the globe
@@ -83,8 +85,14 @@ export function changeViewToCoords(lon, lat){
     //so we can use the lon and lat of earth for our puny globe as well as they are angles
     const Lon = degtoRad(lon)
     const Lat = degtoRad(lat)
-    earth.rotation.y = -Lon 
-    earth.rotation.x = Lat//-ve to adjust the view 
+    /* to make the location on globe face the user/camera,
+    we need to change its rotation(x,y,z) */
+    earth.rotation.set(0,0,0)//eset
+    earth.rotation.set(
+        Lat,
+        -Lon+80,
+        0
+    )
 }
 
 

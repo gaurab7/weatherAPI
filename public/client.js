@@ -1,3 +1,5 @@
+import { latLongTo3D, toggleRotation, changeViewToCoords} from './globe.js'
+
 document.addEventListener('DOMContentLoaded', ()=>{
     const cityForm = document.getElementById('city-form')
     const errorMessageDiv = document.getElementById('error-message');
@@ -33,12 +35,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
             .then(data => {
                 console.log(data)
+                const lat = data.current_weather.latitude
+                const lon = data.current_weather.longitude
+                const coords = latLongTo3D(lat, lon, 1, 0.01)
+                toggleRotation(false)
+                changeViewToCoords(lon, lat)
+                console.log(coords)
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             })
         })
     }
-
-
 })
+
+
