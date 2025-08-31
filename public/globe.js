@@ -94,6 +94,7 @@ export function changeViewToCoords(lon, lat){
 
     earth.rotation.y = -Lon + (-Math.PI / 2)
     earth.rotation.x = Lat
+    rain(scene)
 }
 
 
@@ -118,5 +119,37 @@ export function zoomToCity(position) {
     }
 
     zoom();
+}
+
+//weather effects
+export function rain(scene) {
+    const rainCount = 4000
+    const rainGeometry = new THREE.BufferGeometry()
+    const rainPos = []
+
+    for(let i=0;i<rainCount;i++){
+        rainPos.push(
+            (Math.random()-0.5) * 200,
+            Math.random() *200,
+            (Math.random()-0.5) * 200
+        )
+    }
+    rainGeometry.setAttribute("position", new THREE.Float32BufferAttribute(rainPos, 3))
+    const rainMaterial = new THREE.PointsMaterial({
+        color: 0xaaaaaa,
+        size: 0.2,
+        transparent: false
+    })
+    const rain = new THREE.Points(rainGeometry, rainMaterial)
+    scene.add(rain)
+    function dispRain(){
+        const positions = rainGeometry.attributes.position.array
+        for(let i = 1; i<positions.length;i+=3){
+            positions[i] -= 0.5
+            if(positions[i]<0) positions[i] = 200
+        }
+        rainGeometry.attributes.position.needsUpdate = true
+    }
+    dispRain()
 }
 

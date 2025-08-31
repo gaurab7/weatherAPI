@@ -1,4 +1,4 @@
-import { latLongTo3D, toggleRotation, changeViewToCoords, zoomToCity} from './globe.js'
+import { latLongTo3D, toggleRotation, changeViewToCoords, rain} from './globe.js'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const cityForm = document.getElementById('city-form')
@@ -41,6 +41,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const coords = latLongTo3D(lat, lon, 1)//getting coords wrt globe
                 toggleRotation(false)
                 changeViewToCoords(lon, lat)
+                document.getElementById('city').textContent = city
+                const weatherInfo = [
+                    { label:"Condition", value:`${data.current_weather.conditoion}`},
+                    { label:"Temperature", value:`${data.current_weather.temp_c}`},
+                    { label:"Humidity", value:`${data.current_weather.humidity}`},
+                    { label:"Feelslike", value:`${data.current_weather.feelslike}`},
+                    { label:"Time", value:`${data.current_weather.time}`}
+                ]
+                weatherInfo.forEach(item => {
+                    const li = document.createElement("li")
+                    li.innerHTML = `<strong>${item.label}:</strong> ${item.value}`
+                    document.querySelector('.weather-info').appendChild(li)//byclassName doesnt work
+                })
+                weatherCard.style.display = "block"
              
             })
             .catch(error => {

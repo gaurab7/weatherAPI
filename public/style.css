@@ -1,6 +1,6 @@
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
+    background-color: #d9e0e7;
     margin: 0;
     padding: 20px;
 }
@@ -102,12 +102,31 @@ body{
     text-align: center;
 }
 
-#weather-result {
-    background-color: #f0f4f8;
+#weather-card {
+    background-color: #60fdc1;
     position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%);
     display: none;/*hidden by default, shown when weather result recieved*/
+    border-radius: 4px;
 
 }
+
+.weather-info {
+    display: grid;
+    grid-template-columns: repeat(4, auto);/* 4 grids in a row*/
+    margin: 0;
+    padding: 0;
+}
+
+.weather-info li{
+    list-style: none;
+    margin:0;
+    padding:2px 0;
+    font-size: 0.8rem;
+}
+
 
 @media (max-width: 768px) {
     
