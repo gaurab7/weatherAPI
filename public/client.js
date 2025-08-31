@@ -97,7 +97,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
         })
     }
-
+    document.getElementById('share').addEventListener('click', async()=>{
+        const url = location.href;
+        try{
+            if(navigator.share){
+                await navigator.share({
+                    title: document.title,
+                    text: 'Moist Weather',
+                    url
+                })
+            }
+            else{
+                alert('Sharing not supported')
+            }
+        }
+        catch(err)
+        {
+            console.log(err.msg)
+        }
+    })
 })
 
 

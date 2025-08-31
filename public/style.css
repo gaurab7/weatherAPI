@@ -41,6 +41,8 @@ body{
 }
 
 
+
+
 .search-container{
     display: flex;
     justify-content: center;
@@ -182,20 +184,17 @@ body{
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-.links {
-    display: flex; /*flexbox to align the profile and links */
+
+.profile{
+    display: flex;
     align-items: center; /*vertically center the items */
     background-color: #f8fafc;
     padding: 20px; /*some padding for spacing */
     border-radius: 12px;
 }
 
-.profile{
-    display: flex;
-    justify-content: space-between;
-}
-
-.profile img { 
+.profile a img { 
+    position: relative;
     width: 100px; /*img will be squished into widthxheigt box */
     height: 100px;
     border-radius: 50%; /*makes the box perfectly round .ie. circle*/
@@ -205,8 +204,26 @@ body{
     transform: scale(1);/*so that i can use transition for it*/
     transition: transform 0.1s ease-in-out;
 }
-.profile img:hover{
+.profile a img:hover{
     transform: scale(1.1);/*makes it bigger*/
+
+}
+
+.profile a .link-name {
+    position: absolute;
+    font-size: 1rem;
+    color: #000000;
+    font-style: bold;
+    border: none;
+    background: none;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    pointer-events: none;
+}
+
+/*hover over link, text appears*/
+.profile a:hover .link-name {
+    opacity: 1;
 }
 
 

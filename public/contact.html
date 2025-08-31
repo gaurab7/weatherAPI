@@ -13,7 +13,7 @@
             <li><a href="index.html"><i class="bi bi-cloudy"></i></a></li>
             <li><a href="about.html"><i class="bi bi-question"></i></a></li>
             <li><a href="contact.html"><i class="bi bi-telephone"></i></a></li>
-            <li><a href=""><i class="bi bi-share"></i></a></li>
+            <li><a id="share"><i class="bi bi-share"></i></a></li>
         </ul>
     </nav>        
     <div class="container">
@@ -21,17 +21,22 @@
         <div id="contact-page" class="page-content hidden">
             <h2 class="title">Reach Out</h2>
             <p>I'd love to hear from you! If you have any questions, feedback, or suggestions, please feel free to reach out.</p>
-            <p><strong>For general inquiries, please contact me at:</strong></p>
-            <div class="links">
-                <div class="profile">
-                    <!--noopener ensures that the new page's window.opener object is null so that new page cant acces this-->
+            <p><strong>For general inquiries, contact me at:</strong></p>
+            <div class="profile">
+                 <!--noopener ensures that the new page's window.opener object is null so that new page cant acces this-->
                  <!--rel="noreferrer" prevents the new page from knowing what page the user came from-->
-                 <img id="github" src="assets/prof.jpg" href="https://github.com/gaurab7" target="_blank" rel="noopener noreferrer">
-                 <img id="gmail" src="assets/gmail.svg" href="mailto:gauravvmunankarmi@gmail.com" target="_blank" rel="noopener noreferrer">
-                </div>
+                 <a id="github" href="https://github.com/gaurab7" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/prof.jpg">
+                    <div class="link-name">Github</div>
+                </a>
+                 <a id="mail" href="mailto:gauravvmunankarmi@gmail.com">
+                 <img src="assets/gmail.svg">
+                 <div class="link-name">Mail</div>
+                </a>
             </div>
-            <p style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280; font-style: italic;">Please note: This is a personal project. For immediate weather data issues, please refer to the WeatherAPI documentation.</p>
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: #46494e; font-style:  italic;">Please note: This is a personal project. For immediate weather data issues, please refer to the WeatherAPI documentation.</p>
         </div>
     </div>
+    <script type="module" src="client.js"></script>
 </body>
 </html>
