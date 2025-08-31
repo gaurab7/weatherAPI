@@ -18,17 +18,17 @@ body{
 .nav-links {
     list-style: none;
     display: flex;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
-    gap: 40px;
 }
 
 .nav-links li a {
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
-    padding: 8px 15px;
-    margin: 0 30px;
+    padding: 8px 10px;
+    margin: 0 15px;
     border-radius: 5px; /* smooth corners */
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
@@ -103,28 +103,52 @@ body{
 }
 
 #weather-card {
-    background-color: #60fdc1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    
+    /* Center the card and add padding */
     position: absolute;
-    top: 5%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%);
-    display: none;/*hidden by default, shown when weather result recieved*/
-    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    display: none;
+    padding: 20px;
+    width: 280px; /* Set a fixed width for a clean look */
+    color: #fff; /* White text for contrast */
+}
 
+#city {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .weather-info {
-    display: grid;
-    grid-template-columns: repeat(4, auto);/* 4 grids in a row*/
-    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
     padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
-.weather-info li{
-    list-style: none;
-    margin:0;
-    padding:2px 0;
-    font-size: 0.8rem;
+.weather-info li {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    padding: 5px;
+    text-align: center;
+    flex: 1 1 45%; /* Flex-grow, flex-shrink, basis. Creates 2 items per row */
+}
+
+.weather-info .value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: block; /* Make the value a block element for a new line */
+    margin-top: 5px;
 }
 
 

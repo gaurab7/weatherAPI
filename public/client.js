@@ -1,4 +1,4 @@
-import { latLongTo3D, toggleRotation, changeViewToCoords, rain} from './globe.js'
+import { latLongTo3D, toggleRotation, changeViewToCoords} from './globe.js'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const cityForm = document.getElementById('city-form')
@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const lat = data.current_weather.latitude
                 const lon = data.current_weather.longitude
                 const coords = latLongTo3D(lat, lon, 1)//getting coords wrt globe
-                toggleRotation(false)
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [

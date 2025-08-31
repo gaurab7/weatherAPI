@@ -91,10 +91,32 @@ export function changeViewToCoords(lon, lat){
     const Lat = degtoRad(lat)
     /* to make the location on globe face the user/camera,
     we need to change its rotation(x,y,z) */
+    const targetLon = (-Lon - (Math.PI / 2))
 
-    earth.rotation.y = -Lon + (-Math.PI / 2)
-    earth.rotation.x = Lat
-    rain(scene)
+    //stop rotation and we make rotation faster ourselves
+    toggleRotation(false)
+    function smoothEnd(){
+        const curRotY = earth.rotation.y
+        const curRotX = earth.rotation.x
+        const diffY = targetLon - curRotY
+        const diffX = Lat - curRotX
+        const faster = 0.09
+
+        earth.rotation.y += diffY * faster//rotation on the y axis only
+        earth.rotation.x += diffX * faster
+
+        const tol = 0.0002
+        if(Math.abs(diffY)<tol && Math.abs(diffX)<tol)
+        {
+            earth.rotation.y = targetLon
+            earth.rotation.x = Lat
+        }
+        else{
+            requestAnimationFrame(smoothEnd)
+        }
+    }
+
+    requestAnimationFrame(smoothEnd)
 }
 
 
@@ -121,35 +143,4 @@ export function zoomToCity(position) {
     zoom();
 }
 
-//weather effects
-export function rain(scene) {
-    const rainCount = 4000
-    const rainGeometry = new THREE.BufferGeometry()
-    const rainPos = []
-
-    for(let i=0;i<rainCount;i++){
-        rainPos.push(
-            (Math.random()-0.5) * 200,
-            Math.random() *200,
-            (Math.random()-0.5) * 200
-        )
-    }
-    rainGeometry.setAttribute("position", new THREE.Float32BufferAttribute(rainPos, 3))
-    const rainMaterial = new THREE.PointsMaterial({
-        color: 0xaaaaaa,
-        size: 0.2,
-        transparent: false
-    })
-    const rain = new THREE.Points(rainGeometry, rainMaterial)
-    scene.add(rain)
-    function dispRain(){
-        const positions = rainGeometry.attributes.position.array
-        for(let i = 1; i<positions.length;i+=3){
-            positions[i] -= 0.5
-            if(positions[i]<0) positions[i] = 200
-        }
-        rainGeometry.attributes.position.needsUpdate = true
-    }
-    dispRain()
-}
 
