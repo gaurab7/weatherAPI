@@ -42,16 +42,26 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [
-                    { label:"Condition", value:`${data.current_weather.conditoion}`},
+                    { label:"Condition", value:`${data.current_weather.condition}`},
                     { label:"Temperature", value:`${data.current_weather.temp_c}`},
                     { label:"Humidity", value:`${data.current_weather.humidity}`},
                     { label:"Feelslike", value:`${data.current_weather.feelslike}`},
                     { label:"Time", value:`${data.current_weather.time}`}
                 ]
                 weatherInfo.forEach(item => {
-                    const li = document.createElement("li")
-                    li.innerHTML = `<strong>${item.label}:</strong> ${item.value}`
-                    document.querySelector('.weather-info').appendChild(li)//byclassName doesnt work
+                    if(item.label == "Condition"){
+                        const icon = weatherIcons(item)
+                        console.log(icon)
+                        const li = document.createElement("li")
+                        li.innerHTML = `<strong>${item.label}:</strong> <i class="${icon.iconClass}" style="color: ${icon.iconColor}"></i>`
+                        document.querySelector('.weather-info').appendChild(li)
+                    }
+                    else{
+                         const li = document.createElement("li")
+                         li.innerHTML = `<strong>${item.label}:</strong> ${item.value}`
+                         document.querySelector('.weather-info').appendChild(li)//byclassName doesnt work
+                    }
+
                 })
                 weatherCard.style.display = "block"
              
@@ -63,4 +73,99 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 })
 
+function weatherIcons(condition){
+    const text = condition.value.toLowerCase()
+    let iconClass
+    let iconColor
 
+    const timeCheck = new Date().getHours()
+
+    //didnt know it could be done like this
+    switch (true) {
+        case text.includes('sunny'):
+            if(timeCheck>=6 && timeCheck<=18){
+                iconClass = "bi bi-sun-fill"
+                iconColor = "#FFD700"
+            }
+            else{
+                iconClass = "bi bi-moon-fill"
+                iconColor =  "#ECF0F1"
+            } 
+            break
+        case text.includes('clear'):
+            if(timeCheck>=6 && timeCheck<=18){
+                iconClass = "bi bi-sun-fill"
+                iconColor = "#FFD700"
+            }
+            else{
+                iconClass = "bi bi-moon-fill"
+                iconColor =  "#ECF0F1"
+            } 
+            break
+        case text.includes('partly cloudy'):
+            if(timeCheck>=6 && timeCheck<=18){
+                iconClass = "bi bi-cloud-sun-fill"
+                iconColor = "#bdc3c7"
+            }
+            else{
+                iconClass = "bi bi-cloud-moon-fill"
+                iconColor =  "#bdc3c7"
+            } 
+            break
+        case text.includes('cloudy'):
+        case text.includes('overcast'):
+            iconClass = "bi bi-clouds-fill"
+            iconColor = "#bdc3c7"
+            break
+        case text.includes('mist'):
+            iconClass = "bi bi-cloud-fog-fill"
+            iconColor = "#D3D3D3"
+            break          
+        case text.includes('fog'):
+            iconClass = "bi bi-cloud-fog-fill"
+            iconColor = "#D3D3D3"
+            break
+        case text.includes('rain'):
+            iconClass = "bi bi-rain-fill"
+            iconColor = "#4e6097ff"
+            break
+        case text.includes('drizzle'):
+            iconClass = "bi bi-cloud-drizzle-fill"
+            iconColor = "#7f8c8d"
+            break
+        case text.includes('showers'):
+            iconClass = "bi bi-cloud-rain-heavy-fill"
+            iconColor = "#7f8c8d"
+            break
+        case text.includes('snow'):
+            iconClass = "bi bi-cloud-snow-fill"
+            iconColor = "#ECF0F1"
+            break
+        case text.includes('blizzard'):
+            iconClass = "bi bi-cloud-snow-fill"
+            iconColor = "#ECF0F1"
+            break
+        case text.includes('hail'):
+            iconClass = "bi bi-cloud-hail-fill"
+            iconColor = "#ECF0F1"
+            break
+        case text.includes('sleet'):
+            iconClass = "bi bi-cloud-snow-fill"
+            iconColor = "#ECF0F1"
+            break
+        case text.includes('thunder'):
+            iconClass = "bi bi-lightning-fill"
+            iconColor = "#FFD700"
+            break
+        case text.includes('storm'):
+            iconClass = "bi bi-cloud-lightning-fill"
+            iconColor = "#8a8a8a"
+            break
+        default:
+            iconClass = "bi bi-question-circle"// A default icon
+            iconColor = "white"
+            break
+    }
+
+    return {iconClass, iconColor}
+}
