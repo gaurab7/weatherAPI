@@ -27,15 +27,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
             .then(response => {
                 //if res.status is not 2xx, throw error--in case of invalid city 400 error is thrown
                 if(!response.ok){
-                    errorMessageDiv.style.display = 'block'
-                    errorMessageDiv.textContent = 'City not found. Invalid City Name.'
                     return response.json().then(errData => {
+                        errorMessageDiv.style.display = 'block'
+                        errorMessageDiv.textContent = `${errData.msg}`
                         throw new Error(errData.msg || 'Error fetching weather data');
                     })
                 }
                 return response.json()
             })
             .then(data => {
+                //clear any info that was there in case user searches another city without clearing
+                document.querySelector('.weather-info').innerHTML = ""
                 console.log(data)
                 const lat = data.current_weather.latitude
                 const lon = data.current_weather.longitude
@@ -46,8 +48,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     { label:"Temperature", value:`${data.current_weather.temp_c}`},
                     { label:"Humidity", value:`${data.current_weather.humidity}`},
                     { label:"Feelslike", value:`${data.current_weather.feelslike}`},
-                    { label:"Time", value:`${data.current_weather.time}`}
+                    { label:"Time", value:`${data.current_weather.time}`},
+                    { label: "Daylight Status", value: `${data.current_weather.isDay}`}
                 ]
+                const date = data.current_weather.time
+                const timeOfCity = date.split('')[1]//takes the second element only
                 weatherInfo.forEach(item => {
                     if(item.label == "Condition"){
                         const icon = weatherIcons(item)
@@ -55,6 +60,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         const li = document.createElement("li")
                         li.innerHTML = `<strong>${item.label}:</strong> <i class="${icon.iconClass}" style="color: ${icon.iconColor}"></i>`
                         document.querySelector('.weather-info').appendChild(li)
+                    }
+                    else if(item.label == "Daylight Status"){
+                            if(item.value==1){
+                                const li = document.createElement("li")
+                                li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-sun-fill" style="color: "#FFD700""></i>`
+                                document.querySelector('.weather-info').appendChild(li)
+                            }
+                        else {
+                          const li = document.createElement("li")
+                          li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-moon-fill" style="color: "indigo""></i>`
+                          document.querySelector('.weather-info').appendChild(li)
+                        }
                     }
                     else{
                          const li = document.createElement("li")
