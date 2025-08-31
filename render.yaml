@@ -1,8 +1,18 @@
 services:
-  -type: web
-  name: moist-weather
-  env: node
-  plan: free
-  buildCommand: "npm install"
-  startCommand: "npm start"
-  autoDeploy: true
+  - type: web
+    name: moist-weather
+    env: node
+    plan: free
+    buildCommand: 'npm install'
+    startCommand: 'node src/server.js'
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8848
+      - key: geonames_user
+        sync: false
+      - key: apiKey
+        sync: false
+
