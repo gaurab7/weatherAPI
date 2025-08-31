@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const cityForm = document.getElementById('city-form')
     const errorMessageDiv = document.getElementById('error-message')
     const weatherCard = document.getElementById('weather-card')
+    const clear = document.getElementById('clear')
     if(cityForm){
         cityForm.addEventListener('submit', (e)=>{
             e.preventDefault()//prevents form from submitting and reloading the page
@@ -63,15 +64,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     }
 
                 })
-                weatherCard.style.display = "block"
-             
+                //without this, if u clear once and search again it tries to add event listener to clear but clear doesnt exist untill card does
+                if(weatherCard){
+                    weatherCard.style.display = "block"
+                    clear.addEventListener('click', ()=>{
+                         weatherCard.style.display = "none"//so that the card also disappears
+                         document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card    
+                })
+                }
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             })
         })
     }
+
 })
+
+
+   
 
 function weatherIcons(condition){
     const text = condition.value.toLowerCase()
@@ -126,7 +137,7 @@ function weatherIcons(condition){
             iconColor = "#D3D3D3"
             break
         case text.includes('rain'):
-            iconClass = "bi bi-rain-fill"
+            iconClass = "bi bi-cloud-rain-fill"
             iconColor = "#4e6097ff"
             break
         case text.includes('drizzle'):
