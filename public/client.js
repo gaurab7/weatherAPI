@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 console.log(data)
                 const lat = data.current_weather.latitude
                 const lon = data.current_weather.longitude
-                const coords = latLongTo3D(lat, lon, 1)//getting coords wrt globe
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [
@@ -64,13 +63,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     }
 
                 })
-                //without this, if u clear once and search again it tries to add event listener to clear but clear doesnt exist untill card does
+                //this conditon always works because we never delete the weatercard just hide it
+                //but keep it just because
                 if(weatherCard){
                     weatherCard.style.display = "block"
                     clear.addEventListener('click', ()=>{
                          weatherCard.style.display = "none"//so that the card also disappears
-                         document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card    
-                })
+                         document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card 
+                         toggleRotation(true)//continue rotation if cleared   
+                    })
+                    
                 }
             })
             .catch(error => {

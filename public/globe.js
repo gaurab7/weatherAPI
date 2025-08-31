@@ -4,11 +4,12 @@ let earth
 let camera
 let scene
 let renderer
+let afterPause = false
 document.addEventListener('DOMContentLoaded', ()=>{
         //basic scene setup--THREE.js documentation
-     scene = new THREE.Scene()//where we place the objects
- camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000)//how we view the scene
-     renderer = new THREE.WebGLRenderer({alpha: true})//renders the scene for us
+    scene = new THREE.Scene()//where we place the objects
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000)//how we view the scene
+    renderer = new THREE.WebGLRenderer({alpha: true})//renders the scene for us
 
     scene.background = null//makes background transparent   
 
@@ -46,20 +47,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
     // Position camera
     camera.position.z = 3//camera 3 units away from the origin(0,0,0) where the earth is present
 
-
-    // rotation animation
-    function rotation() {
-        requestAnimationFrame(rotation)//calls the function again and again--creates a loop
-        if(isRotating){
-            //only keep rotating if isRotating is true-- toggleRotation will change this value
-             earth.rotation.y += 0.005//rotate earth on the y-axis like a real earth
-        }
-        renderer.render(scene, camera)//renders the scene from the perspective of the camera
-    }
-
     rotation()
-
+    if(afterPause){
+        rotation()
+    }
 })
+
+
+// rotation animation
+function rotation() {
+    requestAnimationFrame(rotation)//calls the function again and again--creates a loop
+    if(isRotating){
+        //only keep rotating if isRotating is true-- toggleRotation will change this value
+        earth.rotation.y += 0.005//rotate earth on the y-axis like a real earth
+    }
+    renderer.render(scene, camera)//renders the scene from the perspective of the camera
+}
+
 
 //convert the longitude and latitude from the data to coordinates on the globe
 export function degtoRad(deg) {
@@ -81,6 +85,14 @@ export function latLongTo3D(lat, lon, radius) {
 //everyting after getting the coordinates is done in client.js 
 export function toggleRotation(state){
     isRotating = state
+    if(isRotating){
+        //if it was changed from false to true.i.e. pause to resume
+        afterPause = true
+    }
+    else{
+        //if from true to false .i.e resume to pause
+        afterPause = false
+    }
 }
 
 export function changeViewToCoords(lon, lat){
