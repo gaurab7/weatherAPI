@@ -1,4 +1,7 @@
 import { fetchWeather } from '../services/weatherServices.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 
 //need to format this
