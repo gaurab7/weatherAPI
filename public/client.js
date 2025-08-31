@@ -41,10 +41,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const coords = latLongTo3D(lat, lon, 1)//getting coords wrt globe
                 toggleRotation(false)
                 changeViewToCoords(lon, lat)
-                weatherCard.style.display = 'block'
-                weatherCard.textContent= 'results baby'
-                //console.log(coords.x + coords.y + coords.z)
-               // zoomToCity(coords)
+             
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
