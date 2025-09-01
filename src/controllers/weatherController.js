@@ -6,10 +6,24 @@ dotenv.config()
 
 //need to format this
 export async function weatherData(city) {
-       
+    try{            
     const apiKey = process.env.apiKey
     const result = await fetchWeather(city, apiKey)
-    //formating the fetched weather data
+    if(!result.success)
+    {
+        //this means that the city name wasnt coorect and so no data was found
+        //or maybe some other fetch related error
+        //i mistakenly serached guatamala instead of guatemala
+        //the city verification returns true becaues even tho we searched guatamala
+        // it found the best match .i.e guatemala 
+        // and as we just return true or false there the weather fetch continues with guatamala which doesnt exist
+        //"error":{"code":1006,"message":"No matching location found."}}
+        //so an error like this is result
+        const errorMsg = result.msg || "some fetching error weatherapi"
+        throw new Error(errorMsg)//so we just send result with error instead
+    }
+    else{
+        //formating the fetched weather data
     //const { parent: { child } } = object;--->Extracts object.parent.child into a variable named child.
     //const { originalName: newName } = object;--->Extracts object.originalName into a variable named newName.
     const { 
@@ -31,6 +45,8 @@ export async function weatherData(city) {
     } = result.data
 
     return {
+        success: true,
+        data:{
         time : lclTme,
         last_updated :  lstUpd ,
         temp_c :  temp ,//result.data.current.temp_c---> temp
@@ -44,6 +60,7 @@ export async function weatherData(city) {
         latitude: lat,
         longitude: lon
     }
+}
     //better than:
     /* 
     const localtime = result.data.location.localtime
@@ -56,5 +73,16 @@ export async function weatherData(city) {
     const hum = result.data.current.humidity
     const cld = result.data.current.cloud
     const flike = result.data.current.feelslike*/
+    }
+    
+    }
+    catch(error){
+        console.log("Fetch failed: ", error.message)
+        return {
+            success: false,
+            msg: error.message
+        }//returns the result object-->{"error":{"code":1006,"message":"No matching location found."}}
+    }
+
 }
 

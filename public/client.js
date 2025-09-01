@@ -27,31 +27,48 @@ document.addEventListener('DOMContentLoaded', ()=>{
             .then(response => {
                 //if res.status is not 2xx, throw error--in case of invalid city 400 error is thrown
                 if(!response.ok){
-                    return response.json().then(errData => {
+                    return response.text().then(errText=>{
+                        let errMsg
+                        try{
+                            const errData = JSON.parse(errText)
+                            errMsg = errData.msg || 'Error fetching weather data'
+                        }
+                        catch{
+                            errMsg = errText || `ERROR: ${response.status}`
+                        }
+
                         errorMessageDiv.style.display = 'block'
-                        errorMessageDiv.textContent = `${errData.msg}`
-                        throw new Error(errData.msg || 'Error fetching weather data');
+                        errorMessageDiv.textContent = errMsg
+                        throw new Error(errMsg)
                     })
                 }
                 return response.json()
             })
             .then(data => {
-                //clear any info that was there in case user searches another city without clearing
+                if(!data.current_weather.success){
+                    //this means fetch failed-either because the city name wasnt correct or
+                        errorMessageDiv.style.display = 'block'
+                        console.log(data.current_weather)
+                        errorMessageDiv.textContent = data.current_weather.msg
+                        return
+                }
+                else{
+                                    //clear any info that was there in case user searches another city without clearing
                 document.querySelector('.weather-info').innerHTML = ""
                 console.log(data)
-                const lat = data.current_weather.latitude
-                const lon = data.current_weather.longitude
+                const lat = data.current_weather.data.latitude
+                const lon = data.current_weather.data.longitude
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [
-                    { label:"Condition", value:`${data.current_weather.condition}`},
-                    { label:"Temperature", value:`${data.current_weather.temp_c}`},
-                    { label:"Humidity", value:`${data.current_weather.humidity}`},
-                    { label:"Feelslike", value:`${data.current_weather.feelslike}`},
-                    { label:"Time", value:`${data.current_weather.time}`},
-                    { label: "Daylight Status", value: `${data.current_weather.isDay}`}
+                    { label:"Condition", value:`${data.current_weather.data.condition}`},
+                    { label:"Temperature", value:`${data.current_weather.data.temp_c}`},
+                    { label:"Humidity", value:`${data.current_weather.data.humidity}`},
+                    { label:"Feelslike", value:`${data.current_weather.data.feelslike}`},
+                    { label:"Time", value:`${data.current_weather.data.time}`},
+                    { label: "Daylight Status", value: `${data.current_weather.data.isDay}`}
                 ]
-                const date = data.current_weather.time
+                const date = data.current_weather.data.time
                 const timeOfCity = date.split('')[1]//takes the second element only
                 weatherInfo.forEach(item => {
                     if(item.label == "Condition"){
@@ -91,6 +108,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     })
                     
                 }
+                }
+
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
