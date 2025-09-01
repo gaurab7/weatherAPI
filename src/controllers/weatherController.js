@@ -35,13 +35,18 @@ export async function weatherData(city) {
             last_updated :  lstUpd ,
             temp_c :  temp ,//result.data.current.temp_c---> temp
             is_day : is_day ,
-            condition : { text : cond },
+            condition : { 
+                text : cond,
+                icon : iconLink
+            },
             wind_kph :  wind ,
             wind_dir :  winddir ,
             humidity :  hum ,
             cloud :   cld ,
-            feelslike_c :  flike 
-        } 
+            feelslike_c :  flike,
+            uv: uvInd
+        },
+        forecast: { forecastdays }//forecastdays is an array-->has 5 days
     } = result.data
 
     return {
