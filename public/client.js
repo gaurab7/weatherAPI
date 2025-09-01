@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 const lat = data.current_weather.data.latitude
                 const lon = data.current_weather.data.longitude
                 //storing locally
-                sessionStorage.setItem('forecastdata',JSON.stringify(data.current_weather.data.forecast))//the only method i could find
+                localStorage.setItem('forecastdata',JSON.stringify(data.current_weather.data.forecast))//the only method i could find
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [
