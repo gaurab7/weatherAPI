@@ -46,7 +46,7 @@ export async function weatherData(city) {
             feelslike_c :  flike,
             uv: uvInd
         },
-        forecast: { forecastdays }//forecastdays is an array-->has 5 days
+        forecast: forecastday//forecastdays is an array-->has 5 days
     } = result.data
 
     return {
@@ -65,7 +65,7 @@ export async function weatherData(city) {
         feelslike :  flike,
         latitude: lat,
         longitude: lon,
-        forecast: { forecastdays }
+        forecast:  forecastday 
         }  
 
     }

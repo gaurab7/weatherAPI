@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 console.log(data)
                 const lat = data.current_weather.data.latitude
                 const lon = data.current_weather.data.longitude
+                //storing locally
+                sessionStorage.setItem('forecastdata',JSON.stringify(data.current_weather.data.forecast))//the only method i could find
                 changeViewToCoords(lon, lat)
                 document.getElementById('city').textContent = city
                 const weatherInfo = [
@@ -68,25 +70,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     { label:"Time", value:`${data.current_weather.data.time}`},
                     { label: "Daylight Status", value: `${data.current_weather.data.is_day}`}
                 ]
-                const date = data.current_weather.data.time
-                const timeOfCity = date.split('')[1]//takes the second element only
                 weatherInfo.forEach(item => {
                     if(item.label == "Condition"){
                         const icon = data.current_weather.data.iconLink
-                        console.log(icon)
                         const li = document.createElement("li")
-                        li.innerHTML = `<strong>${item.label}:</strong> <img src="${icon}" style="width: 35px; height: 35px;"/>`
+                        li.innerHTML = `<strong>${item.label}:</strong> <img src="${icon}" style="width: 30%; height: 30%;"/>`
                         document.querySelector('.weather-info').appendChild(li)
                     }
                     else if(item.label == "Daylight Status"){
                             if(item.value==1){
                                 const li = document.createElement("li")
-                                li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-sun-fill" style="color: #ffd900ff; width:30px; height:30px; display: inline-block;"></i>`
+                                li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-sun-fill" style="color: #ffd900ff; width:30px; font-size: 30px;"></i>`
                                 document.querySelector('.weather-info').appendChild(li)
                             }
                            else {
                               const li = document.createElement("li")
-                              li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-moon-fill" style="color: #99929eff;"></i>`
+                              li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-moon-fill" style="color: #f0e9f5ff; font-size: 30px;"></i>`
                               document.querySelector('.weather-info').appendChild(li)
                             }
                     }
@@ -115,7 +114,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     
                 }
                 }
-
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -141,4 +139,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
             console.log(err.msg)
         }
     })
+    
 })
+

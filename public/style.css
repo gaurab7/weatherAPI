@@ -82,7 +82,7 @@ body{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 600px;
+    height: 900px;
     margin-top: 20px;
 }
 
@@ -90,7 +90,7 @@ body{
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 900px;
     z-index: 1; /*globe in the back so card can overlap*/
 }
 
@@ -115,7 +115,8 @@ body{
     transform: translate(-50%, -50%);
     display: none;
     padding: 20px;
-    width: 280px; /* Set a fixed width for a clean look */
+    width: 380px; /* Set a fixed width for a clean look */
+    height: 380px;
     color: #fff; /* White text for contrast */
     transition: background 0.1s ease-in-out;
 }
