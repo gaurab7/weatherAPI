@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     else if(item.label == "Daylight Status"){
                             if(item.value==1){
                                 const li = document.createElement("li")
-                                li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-sun-fill" style="color: #ffd900ff;"></i>`
+                                li.innerHTML = `<strong>${item.label}:</strong> <i class="bi-sun-fill" style="color: #ffd900ff; width:30px; height:30px; display: inline-block;"></i>`
                                 document.querySelector('.weather-info').appendChild(li)
                             }
                            else {
@@ -101,7 +101,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 //but keep it just because
                 if(weatherCard){
                     weatherCard.style.display = "block"
-                    clear.addEventListener('click', ()=>{
+                    weatherCard.addEventListener('click', ()=>{
+                        window.location.href = "/detailedForecast.html"
+                    })
+                    clear.addEventListener('click', (event)=>{
+                        //to prevent weatherCard's(parent div's) event being triggered when this is clicked
+                        event.stopPropagation()
+
                          weatherCard.style.display = "none"//so that the card also disappears
                          document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card 
                          toggleRotation(true)//continue rotation if cleared   

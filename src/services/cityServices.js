@@ -22,7 +22,7 @@ export async function verifyCity(city) {
          }
   }
     catch (err) {
-    console.log("error verifying city:",err)
+    console.log("error verifying city:")
     return false
    }
 }
