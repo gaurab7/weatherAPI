@@ -57,15 +57,18 @@ export async function weatherData(city) {
         temp_c :  temp ,//result.data.current.temp_c---> temp
         is_day ,
         condition : cond ,
+        iconLink: iconLink,
         wind_kph :  wind ,
         wind_dir :  winddir ,
         humidity :  hum ,
         cloud :   cld ,
         feelslike :  flike,
         latitude: lat,
-        longitude: lon
+        longitude: lon,
+        forecast: { forecastdays }
+        }  
+
     }
-}
     //better than:
     /* 
     const localtime = result.data.location.localtime

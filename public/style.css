@@ -164,6 +164,7 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
 }
 
 .weather-info .label {
@@ -178,10 +179,15 @@ body{
 .weather-info .value {
     font-weight: 600;
     font-size: 1.4em;
+    align-items: center;
     line-height: 1.2;
     display: block;
     margin-top: 2px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.weather-info li img {
+    position: relative;
 }
 
 

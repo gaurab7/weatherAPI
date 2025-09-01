@@ -6,7 +6,7 @@ import axios from 'axios'
 export async function fetchWeather(city, apiKey) {
     try {
         //added days==5 to get the 5-day forecast aswell
-        const weather = await axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}&days=5`)
+        const weather = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(city)}&days=5`)
         if(weather.data){
             return { success: true, data: weather.data}
         } 
