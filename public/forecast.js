@@ -7,7 +7,7 @@ localStorage.setItem('forecastdataCache', JSON.stringify(forecastdata))//for sof
 //but if its for forecast, we do still fetch the weather, but this helps me learn soft cahcing
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    const forecastCard = document.getElementById('detailed-forecast')
+    const forecastSec = document.getElementById('forecast-section')
     const detailedCard = document.getElementById('detailed-card')
     const astro = document.getElementById('astro-card')
     const hourlyChart = document.getElementById('hourly')
@@ -112,15 +112,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         break
                     case 1:
                         day.innerText = "Moist Weather Today"
-                        document.getElementById('dateToday').style.display = 'flex'
+                        document.getElementById('dateToday').style.display = 'block'
                         break
                     case 2:
                         day.innerText = "Moist Weather Tommorrow"
-                        document.getElementById('dateTom').style.display = 'flex'
+                        document.getElementById('dateTom').style.display = 'block'
                         break
                     case 3:
                         day.innerText = "Moist Weather Day After Tommorrow"
-                        document.getElementById('dateDay').style.display = 'flex'
+                        document.getElementById('dateDay').style.display = 'block'
                         break
                     default:
                         day.innerText = "No Content Senor"
@@ -151,8 +151,32 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('dateDay').innerText = `${days[2].date}`
     addContent(tDetailedCard,tAstro,tHourlyChart,days,1)//tommorrow
     addContent(DDetailedCard,DAstro,DHourlyChart,days,2)//day after tommorrow
-
+    addContetnForecast(forecastSec, days)
     //#endregion f-tommor-dayafter
+
+    //#region card-click
+    const day1 = document.getElementById('day1')
+    const day2 = document.getElementById('day2')
+    const day3 = document.getElementById('day3')
+    if(day1){
+        day1.addEventListener('click', ()=>{
+            slider.value=1
+            slider.dispatchEvent(new Event("input", {bubbles: true}))//manually triggering input event of slder after updating value manually
+        })
+    }
+    if(day2){
+        day2.addEventListener('click', ()=>{
+            slider.value=2
+            slider.dispatchEvent(new Event("input", {bubbles: true}))//manually triggering input event of slder after updating value manually
+        })
+    }
+    if(day3){
+        day3.addEventListener('click', ()=>{
+            slider.value=3
+            slider.dispatchEvent(new Event("input", {bubbles: true}))//manually triggering input event of slder after updating value manually
+        })
+    }
+    //#endregion card-click
 })
 
 const charts ={}
@@ -248,7 +272,6 @@ function makeChart(canvasid, days, ind)
         }
     })
 }
-
 function addContent(detailedCard, astro, hourlyChart,days, dayCount)
 {
     //previously used forecastdata which was an obj this days is an array with 3 el
@@ -283,7 +306,36 @@ function addContent(detailedCard, astro, hourlyChart,days, dayCount)
       <li><strong><label>Sun Up: </label></strong> ${days[dayCount].astro.is_sun_up ? 'Yes' : 'No'}</li>
       <li><strong><label>Moon Up: </label></strong> ${days[dayCount].astro.is_moon_up ? 'Yes' : 'No'}</li>
     `
-
-
     makeChart(hourlyChart.id,days, dayCount)
+}
+function addContetnForecast(forecastSection, days){
+
+    for(let dayCount=0;dayCount<=2;dayCount++){
+      const forecastCard = document.createElement('div')
+      forecastCard.setAttribute("id", `day${dayCount+1}`)
+      forecastCard.classList.add('detailed-card')//so that the detailed-card style is applied
+
+      forecastCard.innerHTML = `
+      <li><strong><label><i class="bi bi-umbrella-fill" style="font-size:24px; color:#4A90E2;" title="Condition"></i></label></strong> 
+        <img src="${days[dayCount].day.condition.icon}" style="width:30px; height:30px; vertical-align: middle; margin:0;">
+        <p style="padding:0; font-size:0.7rem; margin:0;">${days[dayCount].day.condition.text}</p>
+      </li>
+      <li><strong><label><i class="bi bi-thermometer-high" title="Max. Temp" style="font-size:24px; color:#FF6B6B;"></i></label></strong> ${days[dayCount].day.maxtemp_c}°C</li>
+      <li><strong><label><i class="bi bi-thermometer-low" title="Min. Temp" style="font-size:24px; color:#4ABDAC;"></i></label></strong> ${days[dayCount].day.mintemp_c}°C</li>
+      <li><strong><label><i class="bi bi-droplet-half" title="Humidity" style="font-size:24px; color:#29B6F6;"></i></label></strong> ${days[dayCount].day.avghumidity}%</li>
+      <li><strong><label><i class="bi bi-cloud-rain-fill" title="Chance of Rain" style="font-size:24px; color:#29B6F6;"></i></label></strong> ${days[dayCount].day.daily_chance_of_rain}%</li>
+      <li><strong><label><i class="bi bi-wind" title="Max Wind" style="font-size:24px; color:grey;"></i></label></strong> ${days[dayCount].day.maxwind_kph} kph</li>
+      <li><strong><label><img src="/assets/uv.png" title="UV Index" alt="UV Index" style="width:30px; height:30px;"></label></strong> ${days[dayCount].day.uv}</li>
+
+    `
+    forecastCard.style.marginBottom = '1rem'
+    forecastCard.style.display = 'flex'
+    forecastCard.style.gap = '15px'
+
+    const p = document.createElement('p')
+    p.innerHTML = `<p style="text-align: center; color:#2C5D7D;"> Moist Forecast D${dayCount+1}</p>`
+    forecastSection.appendChild(p)
+    forecastSection.appendChild(forecastCard) 
+
+    }
 }
