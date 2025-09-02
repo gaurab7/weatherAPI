@@ -18,24 +18,49 @@
         </ul>
     </nav>
     <div class="container">
-        <h2 id="day"></h2>
+        <h2 id="day" style="color: #0D3B66;"></h2>
+        <p id="dateToday" class="date" style="display:block;"></p><!--by defautl show this then js handles rest-->
+        <p id="dateTom" class="date"></p>
+        <p id="dateDay" class="date"></p>
         <div class="day-slider-container">
            <input type="range" id="day-slider" min="0" max="3" value="1" step="1">
         </div>
-        <div id="today-section">
-          <p style="text-align: center;">Current Weather</p>
-          <div id="detailed-today"></div>
-          <p style="text-align: center;">Astro Data</p>
-          <div id="today-astro"></div>
-          <p style="text-align: center;">Hourly Forecast</p>
-          <!--chart.js needs canvas to render-->
-          <canvas id="today-hourly" width="800" height="400"></canvas>
-        </div>
-        <div id="forecast-section"></div>
-        <div id="tommorrow-section"></div>
-        <div id="day-after-section"></div>
 
-        <div class="detailed-forecast"></div>
+        <div id="forecast-section">
+
+        </div>
+
+        <div id="today-section">
+        <!--use id for js class for style as camt have duplicate id-->
+          <p style="text-align: center; color:#2C5D7D;">Current Weather</p>
+          <div id="detailed-card" class="detailed-card"></div>
+          <p style="text-align: center; color:#2C5D7D;">Astro Data</p>
+          <div id="astro-card" class="astro-card"></div>
+          <p style="text-align: center; color:#2C5D7D;">Hourly Forecast</p>
+          <!--chart.js needs canvas to render-->
+          <canvas id="hourly" class="hourly" width="800" height="400"></canvas>
+        </div>
+
+        <div id="tommorrow-section">
+         <p style="text-align: center; color:#2C5D7D;">Weather Throughout The Day</p>
+          <div id="t-detailed-card" class="detailed-card"></div>
+          <p style="text-align: center; color:#2C5D7D;">Astro Data</p>
+          <div id="t-astro-card" class="astro-card"></div>
+          <p style="text-align: center; color:#2C5D7D;">Hourly Forecast</p>
+          <!--chart.js needs canvas to render-->
+          <canvas id="t-hourly" class="hourly" width="800" height="400"></canvas>
+        </div>
+
+        <div id="day-after-section">
+         <p style="text-align: center; color:#2C5D7D;">Weather Throughout The Day</p>
+          <div id="d-detailed-card" class="detailed-card"></div>
+          <p style="text-align: center;color:#2C5D7D;">Astro Data</p>
+          <div id="d-astro-card" class="astro-card"></div>
+          <p style="text-align: center; color:#2C5D7D;">Hourly Forecast</p>
+          <!--chart.js needs canvas to render-->
+          <canvas id="d-hourly" class="hourly" width="800" height="400"></canvas>
+        </div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="forecast.js"></script>

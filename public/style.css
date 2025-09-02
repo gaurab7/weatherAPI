@@ -236,47 +236,52 @@ body{
 .profile a:hover .link-name {
     opacity: 1;
 }
-
-#detailed-today {
-    display: flex;
-    flex-direction: row;
-    background: #dcfff5;
+.detailed-card {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr;/*single row*/
+    background: #F5F7FA;
     color: #424242;
-    border-color: #b1acac;
     border-radius: 8px;
-    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-#detailed-today li {
+.detailed-card li {
     list-style: none;
     font-size: 0.8rem;
     margin: 0;
     padding: 0.3rem;
     display: flex;
-    border-right: 1px solid #E0E0E0; 
     flex-direction: column;
     text-align: center;
     align-items: center;
 }
 
-#today-astro {
+.astro-card {
     display: flex;
     flex-direction: row;
-    background: #dcfff5;
+    background: #F5F7FA;
     color: #424242;
-    border-color: #b1acac;
     border-radius: 8px;
     margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-#today-astro li {
+.astro-card li {
     list-style: none;
     font-size: 0.8rem;
     margin: 0;
     padding: 0.3rem;
     display: flex;
-    border-right: 1px solid #E0E0E0; 
     flex-direction: column;
     text-align: center;
     align-items: center;
+}
+
+.hourly {
+    background: #cccecf;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .day-slider-container{
@@ -291,7 +296,7 @@ body{
 input[type="range"]{ 
     -webkit-appearance: none;
     width: 70%;
-    background-color: #60a888;
+    background-color: #7a7575;
 }
 
 input[type="range"]::-webkit-slider-runnable-track{
@@ -304,7 +309,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;
   width: 25%;
-  background: #464444;
+  background: #67e4b0;
   cursor: pointer;
   transform: scale(1);
   transition: background 0.1s ease-in-out, transform 0.2s ease-in-out;
@@ -312,7 +317,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-webkit-slider-thumb:hover {
   -webkit-appearance: none;
-  background: #2b2a2a; 
+  background: #0e7c50; 
   transform: scale(1.2);
 }
 
@@ -323,6 +328,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 #today-section.show {
     display: block;/*so what we do here is by default its removed and transparent*/
+    /*apparently because opacity is involved we cant use the error message way*/
     opacity: 1;/*when the slider is chnaged we give it space,add it to doc and then make its content not transparent*/
 }
 #tommorrow-section {
@@ -356,6 +362,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
     opacity: 1;
 }
 
+.date {
+    display: none;/*only disp when content loaded*/
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem; 
+    font-weight: bold;
+    color: #1e3652; 
+    background: #F5F7FA; 
+    padding: 8px 12px;  
+    border-radius: 8px; 
+    width: 86.5%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
 
 
