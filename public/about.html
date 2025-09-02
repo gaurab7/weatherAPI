@@ -6,6 +6,39 @@
     <title>About Moist  Weather</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
     <link rel="stylesheet" href="style.css">
+    <style>
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #495057;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+        li {
+            position: relative;
+            padding-left: 25px; 
+            margin-bottom: 12px;
+        }
+        #Features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745; 
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -21,15 +54,27 @@
             <h2 class="title">About Our Site</h2>
             <p>Welcome to Moist Weather, your moist source for accurate and real-time weather information. Our site is designed to provide you with a sleek, interactive, and reliable way to check the weather anywhere in the world.</p>
 
+            <h3 style="font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem;">How to Use</h3>
+            <ul id="how">
+              <li><strong>Check Real-Time Data?</strong> Open the site and view the latest weather conditions, temperature, humidity, and more updated live from our weather API.</li>
+              <li><strong>Search Any Location?</strong> Type in the name of any city to get instant weather updates for that location, anywhere in the world.</li>
+              <li><strong>View Detailed Forecasts?</strong> Click on the weather card to see hourly and daily forecasts, so you can plan your activities with confidence.</li>
+
+            </ul>
+
+
+
             <h3 style="font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem;">Key Features:</h3>
-            <ul>
+            <ul id="Features">
                 <li><strong>Real-Time Data:</strong> We use a powerful weather API to provide up-to-the-minute weather conditions, temperature, humidity, and more.</li>
                 <li><strong>Global Coverage:</strong> Search for any city to get instant weather updates for your location or any other.</li>
                 <li><strong>Detailed Forecasts:</strong> Get an hourly and daily breakdown of upcoming weather to plan your day with confidence.</li>
-                <li><strong>Time-of-Day Insights:</strong> Our app adjusts to show the current time of day—be it Dawn, Day, Afternoon, or Night—for a more personalized experience.</li>
+                <li><strong>See Time-of-Day Insights?</strong> The site adapts to the current time—Dawn, Day, Afternoon, or Night—providing a personalized view of weather conditions.</li>
+                <li><strong>Astro Insights:</strong> You can also get information like Sunrise, Sunset, Moonrise, Moonset, Moon Phase & Moon Illumination/li>         
             </ul>
 
-            <p>This site was built using a Node.js backend with Express.js and a frontend powered by JavaScript, HTML, and CSS. We are committed to providing you with the moist reliable and user-friendly weather experience.</p>
+
+            <p style="font-style: italic; font-size: 0.8rem;">*This site was built using a Node.js backend with Express.js and a frontend powered by JavaScript, HTML, and CSS. We are committed to providing you with the moist reliable and user-friendly weather experience.</p>
         </div>
   </div>
   <script type="module" src="client.js"></script>
