@@ -18,13 +18,23 @@
         </ul>
     </nav>
     <div class="container">
-        <p style="text-align: center;">Current Weather</p>
-        <div id="detailed-today"></div>
-        <p style="text-align: center;">Astro Data</p>
-        <div id="today-astro"></div>
-        <p style="text-align: center;">Hourly Forecast</p>
-        <!--chart.js needs canvas to render-->
-        <canvas id="today-hourly" width="800" height="400"></canvas>
+        <h2 id="day"></h2>
+        <div class="day-slider-container">
+           <input type="range" id="day-slider" min="0" max="3" value="1" step="1">
+        </div>
+        <div id="today-section">
+          <p style="text-align: center;">Current Weather</p>
+          <div id="detailed-today"></div>
+          <p style="text-align: center;">Astro Data</p>
+          <div id="today-astro"></div>
+          <p style="text-align: center;">Hourly Forecast</p>
+          <!--chart.js needs canvas to render-->
+          <canvas id="today-hourly" width="800" height="400"></canvas>
+        </div>
+        <div id="forecast-section"></div>
+        <div id="tommorrow-section"></div>
+        <div id="day-after-section"></div>
+
         <div class="detailed-forecast"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,5 +1,4 @@
 
-
 const forecastdata = JSON.parse(localStorage.getItem('forecastdata')) || null
 
 localStorage.setItem('forecastdataCache', JSON.stringify(forecastdata))//for soft cache if user searches for same city within 10 minutes
@@ -70,12 +69,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
       <li><strong><label>Sun Up: </label></strong> ${days[0].astro.is_sun_up ? 'Yes' : 'No'}</li>
       <li><strong><label>Moon Up: </label></strong> ${days[0].astro.is_moon_up ? 'Yes' : 'No'}</li>
     `
+
+     let labels 
+     let feelsData
+     let rainData 
+     let tempData
     //today-->hourly
     days[0].hour.forEach(hourData => {
-     const labels = days[0].hour.map(h => h.time.slice(11, 16))//HH:MM format
-     const tempData = days[0].hour.map(h => h.temp_c)
-     const feelsData = days[0].hour.map(h => h.feelslike_c)
-     const rainData = days[0].hour.map(h => h.chance_of_rain)
+      labels = days[0].hour.map(h => h.time.slice(11, 16))//HH:MM format
+      tempData = days[0].hour.map(h => h.temp_c)
+      feelsData = days[0].hour.map(h => h.feelslike_c)
+      rainData = days[0].hour.map(h => h.chance_of_rain)
+    })
+
     //creating a chart
     const ctx = hourlyChart.getContext('2d')//context is a thing chartjs uses to draw on the canvas
     
@@ -154,11 +160,50 @@ document.addEventListener('DOMContentLoaded', ()=>{
             }
         }
     })
-        })
+ 
 //#endregion today
 
     //#region forecast
+    const day = document.getElementById('day')
+    const slider = document.getElementById('day-slider')
+    day.innerText = "Moist Weather Today"
+    document.getElementById('today-section').classList.add('show')//on load after all content is fomatted, load today
+    const sections = [
+         document.getElementById('forecast-section'),
+         document.getElementById('today-section'),
+         document.getElementById('tommorrow-section'),
+         document.getElementById('day-after-section')
+    ]
     
+    slider.addEventListener('input', ()=>{
+        const sectionInd = parseInt(slider.value)
+        sections.forEach((element, ind)=>{
+            //element and index of sections array
+            if(ind == sectionInd){
+                //classlist to modify css classes of the el
+                switch(ind){
+                    case 0:
+                        day.innerText = "3-day Moist Forecast"
+                        break
+                    case 1:
+                        day.innerText = "Moist Weather Today"
+                        break
+                    case 2:
+                        day.innerText = "Moist Weather Tommorrow"
+                        break
+                    case 3:
+                        day.innerText = "Moist Weather Day After Tommorrow"
+                        break
+                    default:
+                        day.innerText = "No Content Senor"
+                        break
+                }
+                element.classList.add('show')
+            }
+            else{
+                element.classList.remove('show')
+            }
+        })
+    })
     //#endregion forecast
-
 })

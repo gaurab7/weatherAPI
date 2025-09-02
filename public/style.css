@@ -279,6 +279,86 @@ body{
     align-items: center;
 }
 
+.day-slider-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+
+input[type="range"]{ 
+    -webkit-appearance: none;
+    width: 70%;
+    background-color: #60a888;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    height: 20px;
+    width: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 25%;
+  background: #464444;
+  cursor: pointer;
+  transform: scale(1);
+  transition: background 0.1s ease-in-out, transform 0.2s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  background: #2b2a2a; 
+  transform: scale(1.2);
+}
+
+#today-section {
+    display: none;/*completely removes the section, no space taken*/
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;/*this hides the content-->just transparent not remove*/
+}
+#today-section.show {
+    display: block;/*so what we do here is by default its removed and transparent*/
+    opacity: 1;/*when the slider is chnaged we give it space,add it to doc and then make its content not transparent*/
+}
+#tommorrow-section {
+    display: none;
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+    margin-top: 1.5rem;
+}
+#tommorrow-section.show {
+    display: block;
+    opacity: 1;
+}
+#day-after-section {
+    display: none;
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+    margin-top: 1.5rem;
+}
+#day-after-section.show {
+    display: block;
+    opacity: 1;
+}
+#forecast-section {
+    display: none;
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+    margin-top: 1.5rem;
+}
+#forecast-section.show {
+    display: block;
+    opacity: 1;
+}
+
+
+
+
 
 
 
