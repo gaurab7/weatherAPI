@@ -18,10 +18,16 @@
         </ul>
     </nav>
     <div class="container">
-        <div id="detailed-forecast">
-
-        </div>
+        <p style="text-align: center;">Current Weather</p>
+        <div id="detailed-today"></div>
+        <p style="text-align: center;">Astro Data</p>
+        <div id="today-astro"></div>
+        <p style="text-align: center;">Hourly Forecast</p>
+        <!--chart.js needs canvas to render-->
+        <canvas id="today-hourly" width="800" height="400"></canvas>
+        <div class="detailed-forecast"></div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="forecast.js"></script>
 </body>
 </html>
