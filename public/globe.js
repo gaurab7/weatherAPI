@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     camera.position.z = 3//camera 3 units away from the origin(0,0,0) where the earth is present
 
     rotation()
-    if(afterPause){
+    if(rotationState.afterPause){
         rotation()
     }
 })
