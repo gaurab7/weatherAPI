@@ -1,10 +1,12 @@
+export const rotationState = {
+    isRotating: true,
+    afterPause: false
+}
 
-let isRotating = true
 let earth
 let camera
 let scene
 let renderer
-let afterPause = false
 document.addEventListener('DOMContentLoaded', ()=>{
         //basic scene setup--THREE.js documentation
     scene = new THREE.Scene()//where we place the objects
@@ -55,9 +57,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
 // rotation animation
-function rotation() {
+export function rotation() {
     requestAnimationFrame(rotation)//calls the function again and again--creates a loop
-    if(isRotating){
+    if(rotationState.isRotating){
         //only keep rotating if isRotating is true-- toggleRotation will change this value
         earth.rotation.y += 0.005//rotate earth on the y-axis like a real earth
     }
@@ -84,14 +86,14 @@ export function latLongTo3D(lat, lon, radius) {
 
 //everyting after getting the coordinates is done in client.js 
 export function toggleRotation(state){
-    isRotating = state
-    if(isRotating){
+    rotationState.isRotating = state
+    if(rotationState.isRotating){
         //if it was changed from false to true.i.e. pause to resume
-        afterPause = true
+       rotationState.afterPause = true
     }
     else{
         //if from true to false .i.e resume to pause
-        afterPause = false
+        rotationState.afterPause = false
     }
 }
 

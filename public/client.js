@@ -1,4 +1,4 @@
-import { latLongTo3D, toggleRotation, changeViewToCoords} from './globe.js'
+import { rotationState, rotation, toggleRotation, changeViewToCoords} from './globe.js'
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const cityForm = document.getElementById('city-form')
