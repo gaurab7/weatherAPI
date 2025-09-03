@@ -1,9 +1,15 @@
+html{
+    forced-color-adjust: none !important;
+}
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #d6dfe2 !important;/*to prevent force color change*/
     margin: 0;
     padding: 20px;
-    forced-color-adjust: none;
+    forced-color-adjust: none !important;
+}
+* {
+  forced-color-adjust: none !important;
 }
 
 .navbar {
