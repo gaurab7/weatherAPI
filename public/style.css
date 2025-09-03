@@ -1,8 +1,9 @@
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #d6dfe2;
+    background-color: #d6dfe2 !important;/*to prevent force color change*/
     margin: 0;
     padding: 20px;
+    forced-color-adjust: none;
 }
 
 .navbar {
@@ -393,10 +394,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
         display: grid;
         grid-auto-flow: column;
         grid-template-rows: 1fr;/*single row*/
-        background: #F5F7FA;
+        background: #F5F7FA !important;
         color: #424242;
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        forced-color-adjust: none;
     }
     .detailed-card li {
         list-style: none;
@@ -412,11 +414,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .astro-card {
         display: flex;
         flex-direction: row;
-        background: #F5F7FA;
+        background: #F5F7FA !important;
         color: #424242;
         border-radius: 8px;
         margin-bottom: 10px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        forced-color-adjust: none;
     }
     .astro-card li {
         list-style: none;
