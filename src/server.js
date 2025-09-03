@@ -5,6 +5,7 @@ import { verificationMiddleware } from './middleware/cityVerify.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import cors from 'cors'
+import { limiter } from './middleware/rate_limiter.js'
 
 //to get __dirname in ES6 module
 const __filename = fileURLToPath(import.meta.url)
@@ -18,12 +19,15 @@ app.use(cors())
 
 //enables app to accept and send json data
 app.use(express.json())
+app.set("trust proxy", 1)
 
 app.use(express.static(path.join(__dirname,'../public')))
 app.use('/assets', express.static(path.join(__dirname,'../public/assets')))
 
 
 const PORT = process.env.PORT || 8848
+
+app.use(limiter)
 
 //ROUTES
 app.use('/', publicRoutes)
