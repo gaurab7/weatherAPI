@@ -96,6 +96,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     }
 
                 })
+                let clearEnabled = false
+                setTimeout(() => {
+                  clearEnabled = true
+                }, 2500)//2.5s threshold-->wont trigger until 2.5 sec have passed since card appeared
+                //put 1000 but wasnt enough 
                 //this conditon always works because we never delete the weatercard just hide it
                 //but keep it just because
                 if(weatherCard){
@@ -106,10 +111,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     clear.addEventListener('click', (event)=>{
                         //to prevent weatherCard's(parent div's) event being triggered when this is clicked
                         event.stopPropagation()
-
-                         weatherCard.style.display = "none"//so that the card also disappears
-                         document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card 
-                         toggleRotation(true)//continue rotation if cleared   
+                        if(!clearEnabled) return//ignore immediate clicks
+                        //so theres a bug where the rotation doesnt resume if clear is clicked immeditely
+                        //so we set a delay so that it cant be clicked immediately
+                        weatherCard.style.display = "none"//so that the card also disappears
+                        document.querySelector('.weather-info').innerHTML = '' //clearing the info on the card 
+                        toggleRotation(true)//continue rotation if cleared  
                     })
                     
                 }
@@ -139,6 +146,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
             console.log(err.msg)
         }
     })
+
+    document.querySelectorAll('.faq-list dt').forEach(dt => {
+    dt.addEventListener('click', () => {
+        dt.classList.toggle('active')//toggle class active
+        const dd = dt.nextElementSibling//next sibling is dd tag elment
+        if(dd.style.display === 'block'){
+            dd.style.display = 'none'//hide if it was shown
+        } else {
+            dd.style.display = 'block'//show if it was hidden
+        }
+    });
+});
     
 })
 

@@ -31,10 +31,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(timeCheck>=6 && timeCheck<=18){
         texture = new THREE.TextureLoader().load('/assets/earthDay.jpg')//loads an image to be used as texture
         globeContainer.style.background = 'linear-gradient(to bottom, #87CEEB, #ffffff)'//day gradient background
+        document.body.style.setProperty('background-color', '#d6dfe2', 'important' )
     }
     else{
         texture = new THREE.TextureLoader().load('/assets/earthNight.jpg')//loads an image to be used as texture
         globeContainer.style.background = 'linear-gradient(to bottom, #0f2027, #203a43, #2c5364)'//night gradient background
+        document.body.style.setProperty('background-color', '#0d1a26', 'important' )
     }
     const material = new THREE.MeshStandardMaterial({ map: texture })//material with texture--reflects light
     earth = new THREE.Mesh(geometry, material)//actual object combining geometry and material
