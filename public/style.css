@@ -252,6 +252,8 @@ body{
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+
 .detailed-card li {
     list-style: none;
     font-size: 0.8rem;
@@ -262,6 +264,8 @@ body{
     text-align: center;
     align-items: center;
 }
+
+
 
 .astro-card {
     display: flex;
@@ -408,9 +412,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
     .detailed-card li {
         list-style: none;
-        font-size: 0.5rem;
+        font-size: 0.46rem;
         margin: 0;
-        padding: 0.3rem;
+        padding: 0.25rem;
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -431,7 +435,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         list-style: none;
         font-size: 0.7rem;
         margin: 0;
-        padding: 0.3rem;
+        padding: 0.2rem;
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -445,4 +449,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
         width: 100%;
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+
+    .date {
+    display: none;/*only disp when content loaded*/
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem; 
+    font-weight: bold;
+    color: #2d2e30; 
+    background: #F5F7FA; 
+    padding: 8px 12px;  
+    border-radius: 8px; 
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 }

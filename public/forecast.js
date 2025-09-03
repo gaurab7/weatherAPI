@@ -329,7 +329,7 @@ function addContetnForecast(forecastSection, days){
 
     `
     forecastCard.style.marginBottom = '1rem'
-    forecastCard.style.display = 'flex'
+    //forecastCard.style.display = 'flex'
     forecastCard.style.gap = '15px'
 
     const p = document.createElement('p')
